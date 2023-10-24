@@ -1,28 +1,24 @@
 package eda.com.ChatService.chat.controller;
 
-import eda.com.ChatService.chat.ChatRoom;
-import eda.com.ChatService.chat.service.ChatService;
-import java.util.List;
+import eda.com.ChatService.chat.dto.ChatMessage;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.web.bind.annotation.RestController;
+
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/chat")
+//@RequestMapping("/chat")  WebSocket 통신은 HTTP 엔드포인트가 아니므로 @RequestMapping을 필요하지 않음
 public class ChatController {
   
-  private final ChatService chatService;
+  private final SimpMessageSendingOperations messagingTemplate;
   
-  @PostMapping
-  public ChatRoom createRoom(@RequestParam String name) {
-    return chatService.createRoom(name);
-  }
-  
-  @GetMapping
-  public List<ChatRoom> finalAllRoom() {
-    return chatService.findAllRoom();
+  @MessageMapping("/chat/message")
+  public void message(ChatMessage message) {
+    
+    if (ChatMessage.MessageType.ENTER.equals(message.getType())) {
+      message.setMessage(message.getSender() + "님이 입장하셨습니다");
+    }
+    messagingTemplate.convertAndSend("/sub/chat/room/" + message.getRoomId(), message);
   }
 }

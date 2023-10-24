@@ -1,2 +1,15 @@
+spring:
+  devtools:
+    livereload:
+      enabled: true
+    restart:
+      enabled: false
+  freemarker:
+    cache: false
+  thymeleaf:
+    check-template-location: true
+    prefix: classpath:/templates/
+    suffix: .html
+    cache: false
 server:
   port: 8099
