@@ -23,7 +23,7 @@ public class ChatRoomRepository {
   }
   
   public List<ChatRoom> findALlRoom() {
-    List chatRooms = new ArrayList<>(chatRoomMap.values());
+    List<ChatRoom> chatRooms = new ArrayList<>(chatRoomMap.values());
     Collections.reverse(chatRooms);
     return chatRooms;
   }
