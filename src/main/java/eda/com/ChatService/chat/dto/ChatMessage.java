@@ -1,4 +1,4 @@
-package eda.com.ChatService.chat;
+package eda.com.ChatService.chat.dto;
 
 import lombok.Getter;
 import lombok.Setter;
