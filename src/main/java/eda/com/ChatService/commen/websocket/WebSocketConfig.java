@@ -1,4 +1,4 @@
-package eda.com.ChatService.commen;
+package eda.com.ChatService.commen.websocket;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
