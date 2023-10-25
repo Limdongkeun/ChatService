@@ -22,19 +22,24 @@ repositories {
 }
 
 dependencies {
+	//spring Web
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-devtools'
 	implementation 'org.webjars.bower:bootstrap:4.3.1'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	//webSocket
 	implementation 'org.springframework.boot:spring-boot-starter-websocket'
+
+	//lombok
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	testCompileOnly 'org.projectlombok:lombok'
 	testAnnotationProcessor 'org.projectlombok:lombok'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
+
+	//add 화면에 관련된 것들
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-
-	//add
 	implementation 'org.springframework.boot:spring-boot-starter-freemarker'
 	implementation 'org.springframework.boot:spring-boot-devtools'
 	implementation 'org.webjars.bower:bootstrap:4.3.1'
@@ -43,6 +48,15 @@ dependencies {
 	implementation 'org.webjars:sockjs-client:1.1.2'
 	implementation 'org.webjars:stomp-websocket:2.3.3-1'
 	implementation 'com.google.code.gson:gson:2.8.9'
+
+	//redis
+	//Embedded Redis
+	testImplementation 'it.ozimov:embedded-redis:0.7.2'
+	//redis
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+
+	//log
+	implementation 'org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:1.16'
 }
 
 tasks.named('test') {
