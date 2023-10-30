@@ -1,4 +1,6 @@
 spring:
+  profiles:
+    active: local
   devtools:
     livereload:
       enabled: true
@@ -8,7 +10,7 @@ spring:
     cache: false
   thymeleaf:
     check-template-location: true
-    prefix: classpath:/templates/
+    prefix: classpath:/templates/chat/
     suffix: .html
     cache: false
 server:
