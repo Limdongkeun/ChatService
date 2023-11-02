@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: uat
+    active: local
   devtools:
     livereload:
       enabled: true
