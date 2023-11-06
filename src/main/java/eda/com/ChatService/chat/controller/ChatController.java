@@ -4,6 +4,7 @@ import eda.com.ChatService.chat.dto.ChatMessage;
 import eda.com.ChatService.chat.repository.ChatRoomRepository;
 import eda.com.ChatService.commen.redis.RedisPublisher;
 import lombok.RequiredArgsConstructor;
+import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,7 +17,7 @@ public class ChatController {
   private final ChatRoomRepository chatRoomRepository;
   
   @MessageMapping("/chat/message")
-  public void message(ChatMessage message) {
+  public void message(ChatMessage message, @Header("token") String token) {
     
     if (ChatMessage.MessageType.ENTER.equals(message.getType())) {
       chatRoomRepository.enterChatRoom(message.getRoomId());

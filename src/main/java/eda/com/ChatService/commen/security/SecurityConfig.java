@@ -18,6 +18,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @RequiredArgsConstructor
 public class SecurityConfig {
   
+  
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     http
@@ -53,5 +54,7 @@ public class SecurityConfig {
       .roles("GUEST");
     
   }
+  
+ 
 }
 
