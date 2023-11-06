@@ -2,6 +2,7 @@ package eda.com.ChatService.chat.controller;
 
 import eda.com.ChatService.chat.dto.ChatMessage;
 import eda.com.ChatService.chat.repository.ChatRoomRepository;
+import eda.com.ChatService.commen.jwt.JwtTokenProvider;
 import eda.com.ChatService.commen.redis.RedisPublisher;
 import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.handler.annotation.Header;
@@ -15,13 +16,16 @@ public class ChatController {
   
   private final RedisPublisher redisPublisher;
   private final ChatRoomRepository chatRoomRepository;
+  private final JwtTokenProvider jwtTokenProvider;
   
   @MessageMapping("/chat/message")
   public void message(ChatMessage message, @Header("token") String token) {
     
+    String nickname = jwtTokenProvider.getUserNameFromJwt(token);
+    
     if (ChatMessage.MessageType.ENTER.equals(message.getType())) {
       chatRoomRepository.enterChatRoom(message.getRoomId());
-      message.setMessage(message.getSender() + "님이 입장하셨습니다");
+      message.setMessage(nickname + "님이 입장하셨습니다");
     }
     
     //Websocket에 발행된 메세지를 redis로 발행한다(publish)
