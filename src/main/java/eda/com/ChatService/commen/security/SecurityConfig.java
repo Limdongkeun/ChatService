@@ -18,6 +18,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @RequiredArgsConstructor
 public class SecurityConfig {
   
+  
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     http
@@ -25,6 +26,9 @@ public class SecurityConfig {
       .headers(headers -> {
         headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin);
         })
+//      .cors(cors -> {
+//        cors.configure();
+//      })
       .formLogin(Customizer.withDefaults())
       .authorizeHttpRequests(request ->
         request
@@ -34,8 +38,8 @@ public class SecurityConfig {
     
     return http.build();
   }
-
-  protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+  
+  public void configure(AuthenticationManagerBuilder auth) throws Exception {
     auth.inMemoryAuthentication()
       .withUser("happydaddy")
       .password("{noop}1234")
@@ -48,6 +52,9 @@ public class SecurityConfig {
       .withUser("guest")
       .password("{noop}1234")
       .roles("GUEST");
+    
   }
+  
+ 
 }
 
