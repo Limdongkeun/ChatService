@@ -2,12 +2,9 @@ package eda.com.ChatService.chat.controller;
 
 import eda.com.ChatService.chat.dto.ChatRoom;
 import eda.com.ChatService.chat.repository.ChatRoomRepository;
-import eda.com.ChatService.chat.user.entity.LoginInfo;
-import eda.com.ChatService.commen.jwt.JwtTokenProvider;
+import eda.com.ChatService.commen.jwt.JwtProvider;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,7 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RestController
 @RequestMapping("/chat")
 public class ChatRoomController {
-  private final JwtTokenProvider jwtTokenProvider;
+  private final JwtProvider jwtProvider;
   private final ChatRoomRepository chatRoomRepository;
   
   /*
@@ -75,14 +72,14 @@ public class ChatRoomController {
     return chatRoomRepository.findRoomById(roomId);
   }
   
-  @GetMapping("/user")
-  @ResponseBody
-  public LoginInfo getUserInfo() {
-    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-    String name = auth.getName();
-    return LoginInfo.builder()
-      .name(name)
-      .token(jwtTokenProvider.generateToken(name))
-      .build();
-  }
+//  @GetMapping("/user")
+//  @ResponseBody
+//  public LoginInfo getUserInfo() {
+//    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//    String name = auth.getName();
+//    return LoginInfo.builder()
+//      .name(name)
+//      .token(jwtProvider.generateToken(name))
+//      .build();
+//  }
 }
