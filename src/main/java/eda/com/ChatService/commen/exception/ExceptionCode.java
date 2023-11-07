@@ -2,7 +2,7 @@ package eda.com.ChatService.commen.exception;
 
 import lombok.Getter;
 
-public enum ExceptionCode{
+public enum ExceptionCode {
   
   ERROR_EXECUTING_EMBEDDED_REDIS(401, "ERROR_EXECUTING_EMBEDDED_REDIS"),
   
@@ -12,10 +12,10 @@ public enum ExceptionCode{
   ROLE_IS_NOT_EXISTS(403, "Role is not exists");
   
   @Getter
-  private int status;
+  private final int status;
   
   @Getter
-  private String message;
+  private final String message;
   
   ExceptionCode(int code, String message) {
     this.status = code;

@@ -16,7 +16,8 @@ public class RedisConfig {
    *  Redis와의 연결 설정과 메시지 수신
    */
   @Bean
-  public RedisMessageListenerContainer redisMessageListener(RedisConnectionFactory connectionFactory) {
+  public RedisMessageListenerContainer redisMessageListener(
+    RedisConnectionFactory connectionFactory) {
     //Redis 연결 팩토리와 연결되어 Redis pub/sub 메시지를 수신
     RedisMessageListenerContainer container = new RedisMessageListenerContainer();
     container.setConnectionFactory(connectionFactory);
