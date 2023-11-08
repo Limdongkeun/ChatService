@@ -62,7 +62,7 @@ public class ChatRoomRepository {
   public void enterChatRoom(String roomId) {
     ChannelTopic topic = topics.get(roomId);
     
-    if(topic == null) {
+    if (topic == null) {
       topic = new ChannelTopic(roomId);
       redisMessageListener.addMessageListener(redisSubscriber, topic);
       topics.put(roomId, topic);

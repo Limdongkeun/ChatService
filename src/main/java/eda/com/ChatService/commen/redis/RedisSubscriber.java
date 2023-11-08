@@ -28,7 +28,8 @@ public class RedisSubscriber implements MessageListener {
   public void onMessage(Message message, byte[] pattern) {
     try {
       //redis에서 발행된 데이터를 받아 descrialize Redis에서 받은 메시지를 문자열로 역직렬화
-      String publishMessage = (String) redisTemplate.getStringSerializer().deserialize(message.getBody());
+      String publishMessage =
+        (String) redisTemplate.getStringSerializer().deserialize(message.getBody());
       
       // ChatMessage 객채로 맵핑
       ChatMessage roomMessage = objectMapper.readValue(publishMessage, ChatMessage.class);
