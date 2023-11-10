@@ -1,7 +1,8 @@
 package eda.com.ChatService.commen.jwt;//package eda.com.ChatService.commen.jwt;
 
 
-import eda.com.ChatService.chat.user.entity.Member;
+import eda.com.ChatService.chat.member.entity.Authority;
+import eda.com.ChatService.chat.member.entity.Member;
 import eda.com.ChatService.commen.CustomUserDetailsService;
 import eda.com.ChatService.commen.exception.BusinessLogicException;
 import eda.com.ChatService.commen.exception.ExceptionCode;
@@ -15,10 +16,10 @@ import io.jsonwebtoken.UnsupportedJwtException;
 import io.jsonwebtoken.impl.Base64UrlCodec;
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.util.Date;
+import java.util.List;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -60,7 +61,8 @@ public class JwtProvider {
    * 토큰 생성 메서드
    * accessToekn -> header, refreshToken -> cookie 저장
    */
-  public void createTokenDto(Member member, HttpServletResponse response) {
+//  public void createTokenDto(Member member, HttpServletResponse response) {
+  public String createTokenDto(Member member, List<Authority> roles) {
     Claims claims = Jwts.claims().setSubject(member.getEmail());
     claims.put(ROLES, member.getRoles());
 
@@ -95,6 +97,7 @@ public class JwtProvider {
 //    response.addHeader(AUTHORIZATION_HEADER, GRANT_TYPE + accessToken);
 //    //"Set-Cookie" HTTP 헤더를 사용하여 쿠키를 클라이언트에게 전달
 //    response.addHeader("Set-Cookie", responseCookie.toString());
+    return accessToken;
   }
 
   /*

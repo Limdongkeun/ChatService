@@ -1,4 +1,4 @@
-package eda.com.ChatService.chat.user.entity;
+package eda.com.ChatService.chat.member.entity;
 
 import lombok.Builder;
 import lombok.Getter;

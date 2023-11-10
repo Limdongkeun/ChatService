@@ -1,5 +1,9 @@
 package eda.com.ChatService.commen.security;
 
+import eda.com.ChatService.commen.jwt.JwtAccessDeniedHandler;
+import eda.com.ChatService.commen.jwt.JwtAuthenticationEntryPoint;
+import eda.com.ChatService.commen.jwt.JwtAuthenticationFilter;
+import eda.com.ChatService.commen.jwt.JwtProvider;
 import java.util.Arrays;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -10,7 +14,11 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -21,7 +29,11 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 @RequiredArgsConstructor
 public class SecurityConfig {
   
-  
+  private final JwtProvider jwtProvider;
+  @Bean
+  public PasswordEncoder passwordEncoder() {
+    return new BCryptPasswordEncoder();
+  }
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     http
@@ -29,15 +41,26 @@ public class SecurityConfig {
       .headers(headers -> {
         headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin);
       })
-//      .cors(cors -> {
-//        cors.configure();
-//      })
+      .cors(cors -> {
+        corsConfigurationSource();
+      })
+      .sessionManagement(sessionManagement -> {
+        sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+      })
       .formLogin(Customizer.withDefaults())
       .authorizeHttpRequests(request ->
         request
           .requestMatchers("/chat/**").hasRole("USER")
+          .requestMatchers("/chat/**").hasRole("ADMIN")
           .anyRequest().permitAll()
-      );
+      )
+      .addFilterBefore(new JwtAuthenticationFilter(jwtProvider), UsernamePasswordAuthenticationFilter.class)
+      .exceptionHandling(exceptionHandling -> {
+        exceptionHandling
+          .accessDeniedHandler(new JwtAccessDeniedHandler())
+          .authenticationEntryPoint(new JwtAuthenticationEntryPoint());
+      })
+    ;
     
     return http.build();
   }

@@ -14,6 +14,7 @@ import org.springframework.data.redis.listener.RedisMessageListenerContainer;
 import org.springframework.stereotype.Repository;
 
 @Repository
+
 @RequiredArgsConstructor
 public class ChatRoomRepository {
   
