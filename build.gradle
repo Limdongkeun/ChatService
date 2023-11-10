@@ -53,6 +53,7 @@ dependencies {
 	//Embedded Redis
 	implementation 'it.ozimov:embedded-redis:0.7.2'
 	testImplementation 'it.ozimov:embedded-redis:0.7.2'
+//	implementation ('it.ozimov:embedded-redis:0.7.3') { exclude group: "org.slf4j", module: "slf4j-simple" }
 	//redis
 	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
 
@@ -65,9 +66,13 @@ dependencies {
 
 	//jwt
 	implementation "io.jsonwebtoken:jjwt:0.9.1"
+	implementation 'javax.xml.bind:jaxb-api:2.3.1'
 
 	//JPA
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+	//DB
+	implementation 'org.mariadb.jdbc:mariadb-java-client:2.7.5'
 }
 
 tasks.named('test') {

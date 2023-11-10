@@ -1,6 +1,6 @@
 package eda.com.ChatService.commen;
 
-import eda.com.ChatService.chat.user.entity.Member;
+import eda.com.ChatService.chat.member.entity.Member;
 import java.util.Collection;
 import java.util.stream.Collectors;
 import org.springframework.security.core.GrantedAuthority;

@@ -1,7 +1,7 @@
 package eda.com.ChatService.commen;
 
-import eda.com.ChatService.chat.user.entity.Member;
-import eda.com.ChatService.chat.user.repository.MemberRepository;
+import eda.com.ChatService.chat.member.entity.Member;
+import eda.com.ChatService.chat.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;

@@ -9,7 +9,8 @@ public enum ExceptionCode {
   MEMBER_ALREADY_EXISTS(409, "Member already exists"),
   
   MEMBER_INFO_INCORRECT(404, "Member Info Incorrect"),
-  ROLE_IS_NOT_EXISTS(403, "Role is not exists");
+  ROLE_IS_NOT_EXISTS(403, "Role is not exists"),
+  MEMBER_NOT_FOUND(409, "Role is not exists");
   
   @Getter
   private final int status;
