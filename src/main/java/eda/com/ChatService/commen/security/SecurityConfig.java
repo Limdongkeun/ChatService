@@ -1,16 +1,19 @@
 package eda.com.ChatService.commen.security;
 
+import java.util.Arrays;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Slf4j
 @Configuration
@@ -39,6 +42,23 @@ public class SecurityConfig {
     return http.build();
   }
   
+  
+  @Bean
+  public CorsConfigurationSource corsConfigurationSource() {
+    
+    CorsConfiguration configuration = new CorsConfiguration();
+    configuration.addAllowedOriginPattern("*");
+    configuration.setAllowedMethods(
+      Arrays.asList("*", "OPTIONS", "HEAD", "GET", "POST", "PUT", "DELETE"));
+    configuration.addAllowedHeader("*");
+    configuration.setAllowCredentials(true);
+    configuration.setMaxAge(3600L);
+    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+    source.registerCorsConfiguration("/ws-stomp/**", configuration);
+    
+    return source;
+  }
+/*
   public void configure(AuthenticationManagerBuilder auth) throws Exception {
     auth.inMemoryAuthentication()
       .withUser("happydaddy")
@@ -55,6 +75,8 @@ public class SecurityConfig {
     
   }
   
-  
+ */
+ 
+ 
 }
 
