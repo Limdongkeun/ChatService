@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "AUTHORITY")
+@Table(name = "\"AUTHORITY\"")
 public class Authority {
   
   @Id
