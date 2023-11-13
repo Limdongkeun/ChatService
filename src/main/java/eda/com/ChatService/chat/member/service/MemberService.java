@@ -38,6 +38,7 @@ public class MemberService {
       .id(member.getId())
       .email(member.getEmail())
       .nickname(member.getNickname())
+      .roles(member.getRoles())
       .token(jwtProvider.createTokenDto(member, member.getRoles()))
       .build();
   }

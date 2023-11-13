@@ -6,11 +6,11 @@ public enum ExceptionCode {
   
   ERROR_EXECUTING_EMBEDDED_REDIS(401, "ERROR_EXECUTING_EMBEDDED_REDIS"),
   
-  MEMBER_ALREADY_EXISTS(409, "Member already exists"),
+  MEMBER_ALREADY_EXISTS(409, "MEMBER_ALREADY_EXISTS"),
   
-  MEMBER_INFO_INCORRECT(404, "Member Info Incorrect"),
-  ROLE_IS_NOT_EXISTS(403, "Role is not exists"),
-  MEMBER_NOT_FOUND(409, "Role is not exists");
+  MEMBER_INFO_INCORRECT(404, "MEMBER_INFO_INCORRECT"),
+  ROLE_IS_NOT_EXISTS(403, "ROLE_IS_NOT_EXISTS"),
+  MEMBER_NOT_FOUND(409, "MEMBER_NOT_FOUND");
   
   @Getter
   private final int status;
